@@ -1,0 +1,85 @@
+=====================================================================================================================================
+Soal 3 - Dosen & Mahasiswa (MongoDB)
+=====================================================================================================================================
+
+Start MongoDB by run the following code: (btw I'm using Mac)
+1. $ mongod
+2. $ mongo
+
+========== 1) Create Database: Kampus  & User: andi & budi ==========================================================================
+
+use Kampus
+
+db.createUser({
+... user: "andi",
+... pwd: "anditopsecret",
+... roles: ["dbAdmin"]
+... })
+
+db.createUser({
+... user: "budi",
+... pwd: "buditopsecret",
+... roles: ["readWrite"]
+... })
+
+========== Create Collection: Dosen  ================================================================================================
+
+db.createCollection('Dosen')
+
+db.Dosen.insert(
+... {nama: "Caca",
+... usia: 28,
+... asal:"Jakarta",
+... bidang:"Fisika Astrologi",
+... titel:"S2",
+... status:"Honorer",
+... nip:123,
+... matkul:["Metrologi","Kosmologi","Kalkulus"]}
+... )
+
+db.Dosen.insert(
+... {nama:"Dedi",
+... usia:29,
+... asal:"Yogyakarta",
+... bidang:"Fisika Terapan",
+... titel:"S3",
+... status:"PNS",
+... nip:456,
+... matkul:["Instrumentasi","Elektronika","Fisika Dasar"]}
+... )
+
+db.Dosen.insert(
+... {nama:"Euis",
+... usia:30,
+... asal:"Bandung",
+... bidang:"Fisika Teoretik",
+... titel:"S1",
+... status:"Honorer",
+... nip:789,
+... matkul:["Fisika Dasar","Fisika Modern","Kalkulus"]}
+... )
+
+========== Create Collection: Mahasiswa  =============================================================================================
+
+db.createCollection('Mahasiswa')
+
+db.Mahasiswa.insert([
+... {nama:"Faza",
+... usia:19,
+... asal:"Aceh",
+... prodi:"Fisika",
+... angkatan:2017,
+... nim:123},
+... {nama:"Gilang",
+... usia:20,
+... asal:"Semarang",
+... prodi:"Fisika",
+... angkatan:2017,
+... nim:456},
+... {nama:"Hanafi",
+... usia:19,
+... asal:"Makassar",
+... prodi:"Fisika",
+... angkatan:2017,
+... nim:789}
+... ])

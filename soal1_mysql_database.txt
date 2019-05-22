@@ -1,0 +1,278 @@
+=====================================================================================================================================
+Soal 1 - MySQL Database
+=====================================================================================================================================
+
+Make sure your MySQL Server is active
+Open terminal to enter MySQL Monitor by run this code: (btw I'm using Mac)
+1. $ cd /usr/local/mysql/bin
+2. $ ./mysql -u <username> -p <password>
+
+========== Create Database: sekolahku ==============================================================================================
+
+create database sekolahku;
+use sekolahku;
+select database();
++------------+
+| database() |
++------------+
+| sekolahku  |
++------------+
+
+========== 1) Create Table: users ===================================================================================================
+
+create table users(
+    -> id int not null auto_increment,
+    -> username varchar(50) not null,
+    -> email varchar(50) not null,
+    -> password varchar(50) not null,
+    -> created_at timestamp default current_timestamp,
+    -> updated_at timestamp default current_timestamp on update current_timestamp,
+    -> primary key(id)
+    -> );
+
+describe users;
++------------+-------------+------+-----+-------------------+-----------------------------------------------+
+| Field      | Type        | Null | Key | Default           | Extra                                         |
++------------+-------------+------+-----+-------------------+-----------------------------------------------+
+| id         | int(11)     | NO   | PRI | NULL              | auto_increment                                |
+| username   | varchar(50) | NO   |     | NULL              |                                               |
+| email      | varchar(50) | NO   |     | NULL              |                                               |
+| password   | varchar(50) | NO   |     | NULL              |                                               |
+| created_at | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED                             |
+| updated_at | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++------------+-------------+------+-----+-------------------+-----------------------------------------------+
+
+insert into users (username, email, password) values
+    -> ('Andi', 'andi@andi.com', '12345'),
+    -> ('Budi', 'budi@budi.com', '67890'),
+    -> ('Caca', 'caca@caca.com', 'abcde'),
+    -> ('Deni', 'deni@deni.com', 'fghij'),
+    -> ('Euis', 'euis@euis.com', 'klmno'),
+    -> ('Fafa', 'fafa@fafa.com', 'pqrst');
+
+select * from users;
++----+----------+---------------+----------+---------------------+---------------------+
+| id | username | email         | password | created_at          | updated_at          |
++----+----------+---------------+----------+---------------------+---------------------+
+|  1 | Andi     | andi@andi.com | 12345    | 2019-05-22 16:46:32 | 2019-05-22 16:46:32 |
+|  2 | Budi     | budi@budi.com | 67890    | 2019-05-22 16:46:32 | 2019-05-22 16:46:32 |
+|  3 | Caca     | caca@caca.com | abcde    | 2019-05-22 16:46:32 | 2019-05-22 16:46:32 |
+|  4 | Deni     | deni@deni.com | fghij    | 2019-05-22 16:46:32 | 2019-05-22 16:46:32 |
+|  5 | Euis     | euis@euis.com | klmno    | 2019-05-22 16:46:32 | 2019-05-22 16:46:32 |
+|  6 | Fafa     | fafa@fafa.com | pqrst    | 2019-05-22 16:46:32 | 2019-05-22 16:46:32 |
++----+----------+---------------+----------+---------------------+---------------------+
+
+========== 2) Create Table: courses =================================================================================================
+
+create table courses(
+    -> id int not null auto_increment,
+    -> course varchar(50) not null,
+    -> mentor varchar(50) not null,
+    -> title varchar(50) not null,
+    -> primary key(id)
+    -> );
+
+describe courses;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| course | varchar(50) | NO   |     | NULL    |                |
+| mentor | varchar(50) | NO   |     | NULL    |                |
+| title  | varchar(50) | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+
+insert into courses (course, mentor, title) values
+    -> ('C++', 'Ari', 'Dr.'),
+    -> ('C#', 'Ari', 'Dr.'),
+    -> ('C#', 'Ari', 'Dr.'),
+    -> ('CSS', 'Cania', 'S.Kom'),
+    -> ('HTML', 'Cania', 'S.Kom'),
+    -> ('Javascript', 'Cania', 'S.Kom'),
+    -> ('Python', 'Barry', 'S.T.'),
+    -> ('Micropython', 'Barry', 'S.T.'),
+    -> ('Java', 'Darren', 'M.T.'),
+    -> ('Ruby', 'Darren', 'M.T.');
+
+select * from courses;
++----+-------------+--------+-------+
+| id | course      | mentor | title |
++----+-------------+--------+-------+
+|  1 | C++         | Ari    | Dr.   |
+|  2 | C#          | Ari    | Dr.   |
+|  3 | C#          | Ari    | Dr.   |
+|  4 | CSS         | Cania  | S.Kom |
+|  5 | HTML        | Cania  | S.Kom |
+|  6 | Javascript  | Cania  | S.Kom |
+|  7 | Python      | Barry  | S.T.  |
+|  8 | Micropython | Barry  | S.T.  |
+|  9 | Java        | Darren | M.T.  |
+| 10 | Ruby        | Darren | M.T.  |
++----+-------------+--------+-------+
+
+========== 3) Create Table: userCourses =============================================================================================
+
+create table userCourse(
+    -> id_user int,
+    -> id_course int
+    -> );
+
+describe userCourse;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| id_user   | int(11) | YES  |     | NULL    |       |
+| id_course | int(11) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+
+insert into userCourse (id_user, id_course) values
+    -> (1, 1),
+    -> (1, 2),
+    -> (1, 3),
+    -> (2, 4),
+    -> (2, 5),
+    -> (2, 6),
+    -> (3, 7),
+    -> (3, 8),
+    -> (3, 9),
+    -> (4, 1),
+    -> (4, 3),
+    -> (4, 5),
+    -> (5, 2),
+    -> (5, 4),
+    -> (5, 6),
+    -> (6, 7),
+    -> (6, 8),
+    -> (6, 9);
+
+select * from userCourse;
++---------+-----------+
+| id_user | id_course |
++---------+-----------+
+|       1 |         1 |
+|       1 |         2 |
+|       1 |         3 |
+|       2 |         4 |
+|       2 |         5 |
+|       2 |         6 |
+|       3 |         7 |
+|       3 |         8 |
+|       3 |         9 |
+|       4 |         1 |
+|       4 |         3 |
+|       4 |         5 |
+|       5 |         2 |
+|       5 |         4 |
+|       5 |         6 |
+|       6 |         7 |
+|       6 |         8 |
+|       6 |         9 |
++---------+-----------+
+
+========== 4) Tampilkan semua peserta didik, matakuliah, nama dan gelar mentor ======================================================
+
+select uc.id_user as id, username, course, mentor, title
+    -> from userCourse uc
+    -> join users u on uc.id_user = u.id
+    -> join courses c on uc.id_course = c.id
+    -> order by id;
++------+----------+-------------+--------+-------+
+| id   | username | course      | mentor | title |
++------+----------+-------------+--------+-------+
+|    1 | Andi     | C++         | Ari    | Dr.   |
+|    1 | Andi     | C#          | Ari    | Dr.   |
+|    1 | Andi     | C#          | Ari    | Dr.   |
+|    2 | Budi     | HTML        | Cania  | S.Kom |
+|    2 | Budi     | Javascript  | Cania  | S.Kom |
+|    2 | Budi     | CSS         | Cania  | S.Kom |
+|    3 | Caca     | Python      | Barry  | S.T.  |
+|    3 | Caca     | Micropython | Barry  | S.T.  |
+|    3 | Caca     | Java        | Darren | M.T.  |
+|    4 | Deni     | C++         | Ari    | Dr.   |
+|    4 | Deni     | C#          | Ari    | Dr.   |
+|    4 | Deni     | HTML        | Cania  | S.Kom |
+|    5 | Euis     | C#          | Ari    | Dr.   |
+|    5 | Euis     | CSS         | Cania  | S.Kom |
+|    5 | Euis     | Javascript  | Cania  | S.Kom |
+|    6 | Fafa     | Python      | Barry  | S.T.  |
+|    6 | Fafa     | Micropython | Barry  | S.T.  |
+|    6 | Fafa     | Java        | Darren | M.T.  |
++------+----------+-------------+--------+-------+
+
+========== 5) Tampilkan semua peserta didik, matakuliah, nama dan gelar mentor yang bergelar Sarjana =================================
+
+select uc.id_user as id, username, course, mentor, title
+    -> from userCourse uc
+    -> join users u on uc.id_user = u.id
+    -> join courses c on uc.id_course = c.id
+    -> where title like 'S%';
++------+----------+-------------+--------+-------+
+| id   | username | course      | mentor | title |
++------+----------+-------------+--------+-------+
+|    2 | Budi     | CSS         | Cania  | S.Kom |
+|    2 | Budi     | HTML        | Cania  | S.Kom |
+|    2 | Budi     | Javascript  | Cania  | S.Kom |
+|    3 | Caca     | Python      | Barry  | S.T.  |
+|    3 | Caca     | Micropython | Barry  | S.T.  |
+|    4 | Deni     | HTML        | Cania  | S.Kom |
+|    5 | Euis     | CSS         | Cania  | S.Kom |
+|    5 | Euis     | Javascript  | Cania  | S.Kom |
+|    6 | Fafa     | Python      | Barry  | S.T.  |
+|    6 | Fafa     | Micropython | Barry  | S.T.  |
++------+----------+-------------+--------+-------+
+
+========== 6) Tampilkan semua peserta didik, matakuliah, nama dan gelar mentor yang bergelar selain Sarjana ===========================
+
+select uc.id_user as id, username, course, mentor, title
+    -> from userCourse uc
+    -> join users u on uc.id_user = u.id
+    -> join courses c on uc.id_course = c.id
+    -> where title not like 'S%';
++------+----------+--------+--------+-------+
+| id   | username | course | mentor | title |
++------+----------+--------+--------+-------+
+|    1 | Andi     | C++    | Ari    | Dr.   |
+|    1 | Andi     | C#     | Ari    | Dr.   |
+|    1 | Andi     | C#     | Ari    | Dr.   |
+|    3 | Caca     | Java   | Darren | M.T.  |
+|    4 | Deni     | C++    | Ari    | Dr.   |
+|    4 | Deni     | C#     | Ari    | Dr.   |
+|    5 | Euis     | C#     | Ari    | Dr.   |
+|    6 | Fafa     | Java   | Darren | M.T.  |
++------+----------+--------+--------+-------+
+
+========== 7) Tampilkan matkul, nama & gelar mentor, jumlah peserta untuk tiap matkul ========
+
+select course, mentor, title, count(uc.id_user) as jumlah_peserta
+    -> from userCourse uc
+    -> join users u on uc.id_user = u.id
+    -> join courses c on uc.id_course = c.id
+    -> group by uc.id_course;
++-------------+--------+-------+----------------+
+| course      | mentor | title | jumlah_peserta |
++-------------+--------+-------+----------------+
+| C++         | Ari    | Dr.   |              2 |
+| C#          | Ari    | Dr.   |              2 |
+| C#          | Ari    | Dr.   |              2 |
+| CSS         | Cania  | S.Kom |              2 |
+| HTML        | Cania  | S.Kom |              2 |
+| Javascript  | Cania  | S.Kom |              2 |
+| Python      | Barry  | S.T.  |              2 |
+| Micropython | Barry  | S.T.  |              2 |
+| Java        | Darren | M.T.  |              2 |
++-------------+--------+-------+----------------+
+
+========== 8) Tampilkan mentor, jumlah peserta, dan total fee tiap mentor untuk tiap matkul ==
+
+select mentor, count(uc.id_user) as jumlah_peserta, count(uc.id_user) * 2000000 as total_fee                                                               -> from userCourse uc
+    -> join users u on uc.id_user = u.id
+    -> join courses c on uc.id_course = c.id
+    -> group by mentor;
++--------+----------------+-----------+
+| mentor | jumlah_peserta | total_fee |
++--------+----------------+-----------+
+| Ari    |              6 |  12000000 |
+| Cania  |              6 |  12000000 |
+| Barry  |              4 |   8000000 |
+| Darren |              2 |   4000000 |
++--------+----------------+-----------+
