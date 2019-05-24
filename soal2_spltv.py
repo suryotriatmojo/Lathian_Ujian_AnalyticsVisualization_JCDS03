@@ -32,6 +32,7 @@ plt.figure('Lat-SPLV', figsize=(15,5))
 my_plot = plt.subplot(131, projection = '3d')   #subplot bisa dimasukkan di dalam variabel
 my_plot.plot_wireframe(x1, y1, z1, facecolor = 'red', alpha = 0.3)
 my_plot.scatter(x1, y1, z1, color = 'blue', s = 50)
+my_plot.set_title('x - 2y + z = 6')
 my_plot.set_xlabel('Nilai x')
 my_plot.set_ylabel('Nilai y')
 my_plot.set_zlabel('Nilai z')
@@ -40,6 +41,7 @@ my_plot.set_zlabel('Nilai z')
 my_plot = plt.subplot(132, projection = '3d')   #subplot bisa dimasukkan di dalam variabel
 my_plot.plot_wireframe(x2, y2, z2, facecolor = 'yellow', alpha = 0.3)
 my_plot.scatter(x2, y2, z2, color = 'red', s = 50)
+my_plot.set_title('3x + y - 2z = 4')
 my_plot.set_xlabel('Nilai x')
 my_plot.set_ylabel('Nilai y')
 my_plot.set_zlabel('Nilai z')
@@ -48,11 +50,12 @@ my_plot.set_zlabel('Nilai z')
 my_plot = plt.subplot(133, projection = '3d')   #subplot bisa dimasukkan di dalam variabel
 my_plot.plot_wireframe(x3, y3, z3, facecolor = 'blue', alpha = 0.3)
 my_plot.scatter(x3, y3, z3, color = 'green', s = 50)
+my_plot.set_title('7x - 6y - z = 10')
 my_plot.set_xlabel('Nilai x')
 my_plot.set_ylabel('Nilai y')
 my_plot.set_zlabel('Nilai z')
 
 # adjust subplot arrangement
-plt.subplots_adjust(left = 0, right = 0.97, wspace = 0)
+plt.subplots_adjust(left = 0, right = 0.97, wspace = 0.1)
 
 plt.show()
