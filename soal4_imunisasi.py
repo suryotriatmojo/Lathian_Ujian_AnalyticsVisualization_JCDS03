@@ -34,6 +34,8 @@ plt.bar(df_polio['Tahun'], df_polio['% Balita yang pernah mendapat imunisasi Pol
 plt.title('Polio')
 plt.xticks(df_bcg['Tahun'], rotation = 90)
 
+plt.tight_layout()
+
 # Plotting Figure 2
 plt.figure('Persentasi balita tak terimunisasi 1995-2017', figsize = (15,8))
 
@@ -56,7 +58,7 @@ plt.subplot(224)
 plt.bar(df_polio['Tahun'], 100 - df_polio['% Balita yang pernah mendapat imunisasi Polio'], color = 'b')
 plt.title('Polio')
 plt.xticks(df_bcg['Tahun'], rotation = 90)
-
 plt.tight_layout()
+
 plt.show()
 
