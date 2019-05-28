@@ -247,13 +247,12 @@ select course, mentor, title, count(uc.id_user) as jumlah_peserta
     -> from userCourse uc
     -> join users u on uc.id_user = u.id
     -> join courses c on uc.id_course = c.id
-    -> group by uc.id_course;
+    -> group by c.course;
 +-------------+--------+-------+----------------+
 | course      | mentor | title | jumlah_peserta |
 +-------------+--------+-------+----------------+
 | C++         | Ari    | Dr.   |              2 |
-| C#          | Ari    | Dr.   |              2 |
-| C#          | Ari    | Dr.   |              2 |
+| C#          | Ari    | Dr.   |              4 |
 | CSS         | Cania  | S.Kom |              2 |
 | HTML        | Cania  | S.Kom |              2 |
 | Javascript  | Cania  | S.Kom |              2 |
